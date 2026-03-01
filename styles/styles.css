@@ -387,6 +387,21 @@ main .section.highlight h2 {
   color: var(--text-color-muted);
 }
 
+main .section.highlight a:any-link {
+  color: #fff;
+}
+
+main .section.highlight a.button:any-link {
+  border-color: #fff;
+  background-color: #fff;
+  color: var(--dark-color);
+}
+
+main .section.highlight a.button:hover {
+  background-color: transparent;
+  color: #fff;
+}
+
 main .section.dark {
   background-color: var(--dark-color);
   color: #fff;
