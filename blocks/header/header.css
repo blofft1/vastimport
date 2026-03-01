@@ -1,10 +1,12 @@
 /* header and nav layout */
 header .nav-wrapper {
-  background-color: transparent;
+  background-color: rgb(255 255 255 / 85%);
+  backdrop-filter: blur(10px);
   width: 100%;
   z-index: 2;
   position: fixed;
-  color: var(--background-color);
+  color: var(--text-color);
+  border-bottom: 1px solid rgb(0 0 0 / 12%);
 }
 
 header nav {
@@ -263,7 +265,9 @@ header nav .nav-sections ul > li > ul > li {
     width: 200px;
     top: 150%;
     padding: 16px;
-    background-color: rgb(0 0 0 / 70%);
+    background-color: rgb(255 255 255 / 95%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgb(0 0 0 / 12%);
     border-radius: 8px;
     white-space: initial;
   }
@@ -277,7 +281,7 @@ header nav .nav-sections ul > li > ul > li {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid rgb(0 0 0 / 70%);
+    border-bottom: 8px solid rgb(255 255 255 / 95%);
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
@@ -312,7 +316,7 @@ header nav .nav-tools li:last-child a:any-link {
 }
 
 header nav .nav-tools li:last-child a:any-link:hover {
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: var(--text-color);
+  color: var(--background-color);
   opacity: 1;
 }
