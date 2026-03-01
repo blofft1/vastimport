@@ -56,6 +56,12 @@ header nav p {
 
 header nav a:any-link {
   color: currentcolor;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+header nav a:any-link:hover {
+  opacity: 0.6;
 }
 
 /* hamburger */
@@ -143,9 +149,11 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 header .nav-brand {
   grid-area: brand;
   flex-basis: 128px;
+  font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-s);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1;
+  letter-spacing: 0.15em;
 }
 
 header nav .nav-brand img {
@@ -174,7 +182,7 @@ header nav .nav-sections ul {
 }
 
 header nav .nav-sections ul > li {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 header nav .nav-sections ul > li > ul {
@@ -269,4 +277,8 @@ header nav .nav-sections ul > li > ul > li {
 /* tools */
 header nav .nav-tools {
   grid-area: tools;
+}
+
+header nav .nav-tools a:any-link {
+  font-weight: 400;
 }
