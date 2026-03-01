@@ -1,20 +1,245 @@
 footer {
   background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  font-size: var(--body-font-size-s);
+}
+
+footer .footer {
+  visibility: visible;
 }
 
 footer .footer > div {
-  margin: auto;
   max-width: 1200px;
-  padding: 40px 24px 24px;
+  margin: auto;
+  padding: 60px 24px 32px;
 }
 
+/* General element styles */
 footer .footer p {
-  margin: 0;
+  margin: 0 0 8px;
+  font-weight: 400;
 }
 
+footer .footer h4 {
+  font-family: var(--mono-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 24px;
+  color: var(--text-color);
+}
+
+footer .footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+}
+
+footer .footer li {
+  margin-bottom: 8px;
+}
+
+footer .footer li a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+footer .footer .icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Social icons row */
+footer .footer .footer-socials {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+footer .footer .footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+footer .footer .footer-socials img {
+  width: 20px;
+  height: 20px;
+}
+
+footer .footer li a:hover {
+  color: var(--link-color);
+}
+
+footer .footer .footer-socials a:hover {
+  opacity: 0.6;
+}
+
+/* Section layout containers */
+footer .footer > div > .section:first-child > .default-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+footer .footer > div > .section:last-child {
+  border-top: 1px solid var(--highlight-color);
+  margin-top: 40px;
+}
+
+footer .footer > div > .section:last-child > .default-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding-top: 32px;
+}
+
+/* Bottom section: legal links */
+footer .footer > div > .section:last-child > .default-content-wrapper ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+footer .footer > div > .section:last-child > .default-content-wrapper li {
+  margin-bottom: 0;
+}
+
+footer .footer > div > .section:last-child > .default-content-wrapper li a {
+  font-size: var(--body-font-size-xs);
+  color: var(--text-color-muted);
+}
+
+/* Top section: contact links */
+footer .footer > div > .section:first-child > .default-content-wrapper > p > a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* Top section: contact address */
+footer .footer > div > .section:first-child > .default-content-wrapper > p:not(:has(a)) {
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+/* Bottom section: VAST logo container */
+footer .footer > div > .section:last-child > .default-content-wrapper > p:first-child {
+  margin-bottom: 0;
+}
+
+/* Bottom section: copyright */
+footer .footer > div > .section:last-child > .default-content-wrapper > p:last-child {
+  font-size: var(--body-font-size-xs);
+  color: var(--text-color-muted);
+  margin-bottom: 0;
+}
+
+/* Higher specificity link styles */
+footer .footer > div > .section:last-child > .default-content-wrapper li a:hover {
+  color: var(--text-color);
+}
+
+footer .footer > div > .section:last-child > .default-content-wrapper > p:first-child a {
+  font-family: var(--heading-font-family);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
+  letter-spacing: 0.15em;
+}
+
+footer .footer > div > .section:first-child > .default-content-wrapper > p > a:hover {
+  color: var(--link-color);
+}
+
+/* Desktop layout */
 @media (width >= 900px) {
   footer .footer > div {
-    padding: 40px 32px 24px;
+    padding: 60px 32px 32px;
+  }
+
+  /* Bottom section: two-column layout */
+  footer .footer > div > .section:last-child > .default-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  footer .footer > div > .section:last-child > .default-content-wrapper > ul:first-of-type {
+    grid-column: 1;
+    align-self: end;
+  }
+
+  /* Logo in top-left */
+  footer .footer > div > .section:last-child > .default-content-wrapper > p:first-child {
+    grid-column: 1;
+  }
+
+  /* Social icons top-right */
+  footer .footer > div > .section:last-child > .default-content-wrapper > .footer-socials {
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  /* Copyright bottom-right */
+  footer .footer > div > .section:last-child > .default-content-wrapper > p:last-child {
+    grid-column: 2;
+    place-self: end end;
+  }
+
+  /* Top section: 3-column grid */
+  footer .footer > div > .section:first-child > .default-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 0 48px;
+  }
+
+  /* Contact column (col 1) */
+  footer .footer > div > .section:first-child > .default-content-wrapper > h4:first-of-type {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  footer .footer > div > .section:first-child > .default-content-wrapper > p:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  footer .footer > div > .section:first-child > .default-content-wrapper > p:nth-of-type(2) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  footer .footer > div > .section:first-child > .default-content-wrapper > p:nth-of-type(3) {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  /* Space Stations column (col 2) */
+  footer .footer > div > .section:first-child > .default-content-wrapper > h4:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  footer .footer > div > .section:first-child > .default-content-wrapper > ul:first-of-type {
+    grid-column: 2;
+    grid-row: 2 / 5;
+  }
+
+  /* About Vast column (col 3) */
+  footer .footer > div > .section:first-child > .default-content-wrapper > h4:nth-of-type(3) {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  footer .footer > div > .section:first-child > .default-content-wrapper > ul:nth-of-type(2) {
+    grid-column: 3;
+    grid-row: 2 / 5;
   }
 }
