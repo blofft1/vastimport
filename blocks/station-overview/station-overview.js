@@ -142,4 +142,32 @@ export default function decorate(block) {
     extra.innerHTML = row.innerHTML;
     block.append(extra);
   });
+
+  // Scroll-driven rotation animation
+  const scrollTarget = center;
+  let ticking = false;
+
+  function updateRotation() {
+    const rect = block.getBoundingClientRect();
+    const vh = window.innerHeight;
+    // progress: 0 when block enters bottom, 1 when block exits top
+    const progress = 1 - (rect.bottom / (vh + rect.height));
+    const clamped = Math.max(0, Math.min(1, progress));
+    // Rotate from -15deg to +15deg as you scroll through the section
+    const rotation = (clamped - 0.5) * 30;
+    // Slight vertical shift for parallax feel
+    const translateY = (clamped - 0.5) * -20;
+    scrollTarget.style.transform = `rotate(${rotation}deg) translateY(${translateY}px)`;
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateRotation);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  updateRotation();
 }
