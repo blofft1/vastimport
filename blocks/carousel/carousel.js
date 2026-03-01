@@ -106,12 +106,8 @@ export default async function decorate(block) {
 
   let slideIndicators;
   if (!isSingleSlide) {
-    const slideIndicatorsNav = document.createElement('nav');
-    slideIndicatorsNav.setAttribute('aria-label', 'Carousel Slide Controls');
-    slideIndicators = document.createElement('ol');
-    slideIndicators.classList.add('carousel-slide-indicators');
-    slideIndicatorsNav.append(slideIndicators);
-    block.append(slideIndicatorsNav);
+    const navBar = document.createElement('div');
+    navBar.classList.add('carousel-nav-bar');
 
     const slideNavButtons = document.createElement('div');
     slideNavButtons.classList.add('carousel-navigation-buttons');
@@ -120,7 +116,15 @@ export default async function decorate(block) {
       <button type="button" class="slide-next" aria-label="Next Slide"></button>
     `;
 
-    container.append(slideNavButtons);
+    const slideIndicatorsNav = document.createElement('nav');
+    slideIndicatorsNav.setAttribute('aria-label', 'Carousel Slide Controls');
+    slideIndicators = document.createElement('ol');
+    slideIndicators.classList.add('carousel-slide-indicators');
+    slideIndicatorsNav.append(slideIndicators);
+
+    navBar.append(slideIndicatorsNav);
+    navBar.append(slideNavButtons);
+    block.append(navBar);
   }
 
   rows.forEach((row, idx) => {
