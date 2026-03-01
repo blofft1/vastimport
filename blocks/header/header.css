@@ -29,8 +29,13 @@ header nav[aria-expanded='true'] {
     'tools tools' var(--nav-height) / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
-  background-color: var(--background-color);
-  color: var(--text-color);
+}
+
+@media (width < 900px) {
+  header nav[aria-expanded='true'] {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
 }
 
 @media (width >= 900px) {
