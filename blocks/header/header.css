@@ -156,6 +156,12 @@ header .nav-brand {
   letter-spacing: 0.15em;
 }
 
+header nav .nav-brand ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
 header nav .nav-brand img {
   width: 128px;
   height: auto;
@@ -279,6 +285,29 @@ header nav .nav-tools {
   grid-area: tools;
 }
 
+header nav .nav-tools .default-content-wrapper ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 header nav .nav-tools a:any-link {
   font-weight: 400;
+  font-size: var(--body-font-size-s);
+}
+
+header nav .nav-tools li:last-child a:any-link {
+  border: 1px solid currentcolor;
+  border-radius: 4px;
+  padding: 8px 20px;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+header nav .nav-tools li:last-child a:any-link:hover {
+  background-color: var(--text-color);
+  color: var(--background-color);
+  opacity: 1;
 }
