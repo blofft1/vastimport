@@ -35,6 +35,45 @@
   height: 100%;
 }
 
+/* hero buttons */
+.hero .button-wrapper {
+  display: inline-block;
+  margin: 16px 8px 0 0;
+}
+
+.hero a.button:any-link {
+  background: rgb(42 44 47 / 50%);
+  border: 1px solid rgb(255 255 255 / 20%);
+  color: #fff;
+  font-size: var(--body-font-size-s);
+  padding: 10px 20px;
+}
+
+.hero a.button:hover {
+  background: rgb(42 44 47 / 70%);
+  border-color: rgb(255 255 255 / 40%);
+}
+
+.hero a.button.primary:any-link {
+  min-width: 0;
+  padding: 10px 14px;
+  font-family: var(--mono-font-family);
+  letter-spacing: 2px;
+  font-size: var(--body-font-size-s);
+}
+
+.hero a.button.secondary:any-link {
+  padding: 10px 20px;
+}
+
+.hero a.button.secondary::before {
+  content: '›';
+  margin-right: 8px;
+  font-size: 18px;
+  line-height: 0;
+  vertical-align: middle;
+}
+
 /* video background hero */
 .hero-video {
   isolation: isolate;
