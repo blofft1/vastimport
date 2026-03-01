@@ -73,3 +73,108 @@
   left: calc(50% + 2px);
   transform: translate(-50%, -50%);
 }
+
+/* Autoplay variant — position relative for overlay */
+.video.autoplay {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+/* Overlay controls container */
+.video .video-overlay-controls {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 2;
+}
+
+/* Play/Pause button */
+.video .video-playpause {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: rgb(255 255 255 / 20%);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.video .video-playpause:hover {
+  background: rgb(255 255 255 / 35%);
+}
+
+/* Pause icon — two vertical bars */
+.video .video-playpause-icon {
+  display: flex;
+  gap: 4px;
+  width: 16px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+}
+
+.video .video-playpause-icon::before,
+.video .video-playpause-icon::after {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 16px;
+  background: white;
+  border-radius: 1px;
+  transition: all 0.2s;
+}
+
+/* Play icon — triangle (when paused) */
+.video.video-paused .video-playpause-icon::before {
+  width: 0;
+  height: 0;
+  background: transparent;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 14px solid white;
+  border-radius: 0;
+}
+
+.video.video-paused .video-playpause-icon::after {
+  display: none;
+}
+
+/* Watch full video CTA */
+.video .video-cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 100px;
+  background: rgb(255 255 255 / 20%);
+  backdrop-filter: blur(10px);
+  color: white;
+  text-decoration: none;
+  font-size: var(--body-font-size-s, 14px);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.video .video-cta:hover {
+  background: rgb(255 255 255 / 35%);
+}
+
+.video .video-cta::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid white;
+  border-top: 1.5px solid white;
+  transform: rotate(45deg);
+}

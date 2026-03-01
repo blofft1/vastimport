@@ -106,9 +106,57 @@ const loadVideoEmbed = (block, link, autoplay, background) => {
   }
 };
 
+function buildOverlayControls(block, videoLink) {
+  const controls = document.createElement('div');
+  controls.className = 'video-overlay-controls';
+
+  // Play/Pause toggle
+  const playPause = document.createElement('button');
+  playPause.type = 'button';
+  playPause.className = 'video-playpause';
+  playPause.title = 'Pause';
+  playPause.setAttribute('aria-label', 'Pause video');
+  playPause.innerHTML = '<span class="video-playpause-icon"></span>';
+  playPause.addEventListener('click', () => {
+    const video = block.querySelector('video');
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      playPause.title = 'Pause';
+      playPause.setAttribute('aria-label', 'Pause video');
+      block.classList.remove('video-paused');
+    } else {
+      video.pause();
+      playPause.title = 'Play';
+      playPause.setAttribute('aria-label', 'Play video');
+      block.classList.add('video-paused');
+    }
+  });
+  controls.append(playPause);
+
+  // CTA link (e.g. "Watch full video")
+  if (videoLink) {
+    const cta = document.createElement('a');
+    cta.href = videoLink.href;
+    cta.className = 'video-cta';
+    cta.textContent = videoLink.textContent;
+    cta.target = '_blank';
+    cta.rel = 'noopener noreferrer';
+    controls.append(cta);
+  }
+
+  block.append(controls);
+}
+
 export default async function decorate(block) {
   const placeholder = block.querySelector('picture');
-  const link = block.querySelector('a').href;
+  const allLinks = [...block.querySelectorAll('a')];
+
+  // First link is the video source, any additional link is a CTA overlay
+  const sourceLink = allLinks[0];
+  const ctaLink = allLinks.length > 1 ? allLinks[1] : null;
+
+  const link = sourceLink ? sourceLink.href : '';
   block.textContent = '';
   block.dataset.embedLoaded = false;
 
@@ -141,5 +189,9 @@ export default async function decorate(block) {
       }
     });
     observer.observe(block);
+  }
+
+  if (autoplay && (ctaLink || placeholder)) {
+    buildOverlayControls(block, ctaLink);
   }
 }
