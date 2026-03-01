@@ -25,3 +25,159 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* ============================================
+   Missions variant
+   ============================================ */
+
+/* Remove wrapper padding for edge-to-edge cards */
+.cards-container:has(.cards.missions) .cards-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+/* Section header: two-column layout on desktop */
+@media (width >= 900px) {
+  .section:has(.cards.missions) > .default-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+  }
+
+  .section:has(.cards.missions) > .default-content-wrapper > h3 {
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+
+  .section:has(.cards.missions) > .default-content-wrapper > p {
+    grid-column: 2;
+  }
+}
+
+.cards.missions .cards-missions-grid {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cards.missions .cards-mission-card {
+  position: relative;
+  flex: 1;
+}
+
+.cards.missions .cards-mission-bg {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  aspect-ratio: 1 / 1.08;
+  padding-left: 24px;
+}
+
+.cards.missions .cards-mission-bg picture {
+  position: absolute;
+  inset: 0;
+}
+
+.cards.missions .cards-mission-bg picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cards.missions .cards-mission-title {
+  position: relative;
+  z-index: 2;
+}
+
+.cards.missions .cards-mission-title h4 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+}
+
+/* Overlay — hidden by default via clip-path */
+.cards.missions .cards-mission-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  background: #ece8e3;
+  padding: 32px 40px 32px 24px;
+  color: #2a2c2f;
+  clip-path: inset(100% 0 0);
+  transition: clip-path 0.5s cubic-bezier(0.62, 0.05, 0.01, 0.99);
+  z-index: 3;
+}
+
+.cards.missions .cards-mission-card:hover .cards-mission-overlay {
+  clip-path: inset(0% 0 0);
+}
+
+.cards.missions .cards-mission-overlay-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cards.missions .cards-mission-overlay h5 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.cards.missions .cards-mission-overlay ul {
+  list-style: square;
+  padding-left: 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cards.missions .cards-mission-overlay li {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Crosshair decorations at card corners */
+.cards.missions .cards-crosshair {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  color: rgb(255 255 255 / 40%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.cards.missions .cards-crosshair-top-left {
+  top: -8px;
+  left: -8px;
+}
+
+.cards.missions .cards-crosshair-top-right {
+  top: -8px;
+  right: -8px;
+}
+
+.cards.missions .cards-crosshair-bottom-left {
+  bottom: -8px;
+  left: -8px;
+}
+
+.cards.missions .cards-crosshair-bottom-right {
+  bottom: -8px;
+  right: -8px;
+}
+
+/* Mobile: stack cards */
+@media (width < 900px) {
+  .cards.missions .cards-missions-grid {
+    flex-direction: column;
+  }
+}
