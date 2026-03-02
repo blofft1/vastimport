@@ -58,9 +58,18 @@ function embedVimeo(url, autoplay, background) {
   return temp.children.item(0);
 }
 
-function embedDMVideo(link) {
+function embedDMVideo(link, autoplay, background) {
   // Ensure the URL ends with /play for the DM video player
-  const playUrl = link.endsWith('/play') ? link : `${link}/play`;
+  let playUrl = link.endsWith('/play') ? link : `${link}/play`;
+  if (background || autoplay) {
+    const params = new URLSearchParams();
+    if (autoplay) params.set('autoplay', 'true');
+    if (background) {
+      params.set('muted', 'true');
+      params.set('loop', 'true');
+    }
+    playUrl += `?${params.toString()}`;
+  }
   const temp = document.createElement('div');
   temp.innerHTML = `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
       <iframe src="${playUrl}"
@@ -116,7 +125,7 @@ const loadVideoEmbed = (block, link, autoplay, background) => {
       block.dataset.embedLoaded = true;
     });
   } else if (isDM) {
-    const embedWrapper = embedDMVideo(link);
+    const embedWrapper = embedDMVideo(link, autoplay, background);
     block.append(embedWrapper);
     embedWrapper.querySelector('iframe').addEventListener('load', () => {
       block.dataset.embedLoaded = true;
