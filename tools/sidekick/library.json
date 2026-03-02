@@ -1,0 +1,13 @@
+{
+  "blocks": {
+    "data": [
+      { "name": "Accordion", "path": "/content/docs/library/blocks/accordion" },
+      { "name": "Breadcrumbs", "path": "/content/docs/library/blocks/breadcrumbs" },
+      { "name": "Buttons", "path": "/content/docs/library/blocks/buttons" },
+      { "name": "Cards", "path": "/content/docs/library/blocks/cards" },
+      { "name": "Carousel", "path": "/content/docs/library/blocks/carousel" },
+      { "name": "Columns", "path": "/content/docs/library/blocks/columns" },
+      { "name": "Video", "path": "/content/docs/library/blocks/video" }
+    ]
+  }
+}
