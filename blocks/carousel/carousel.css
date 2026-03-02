@@ -226,3 +226,85 @@
     font-size: var(--body-font-size-s);
   }
 }
+
+/* Press variant — quote cards with small logos */
+.carousel.press {
+  position: relative;
+}
+
+.carousel.press .carousel-slide {
+  flex: 0 0 calc(100% - 32px);
+  box-sizing: border-box;
+  background-color: transparent;
+  padding: 32px;
+  border: 1px solid rgb(0 0 0 / 8%);
+}
+
+.carousel.press .carousel-slide .carousel-slide-image {
+  width: auto;
+}
+
+.carousel.press .carousel-slide .carousel-slide-image picture {
+  display: inline-block;
+}
+
+.carousel.press .carousel-slide .carousel-slide-image picture > img {
+  width: auto;
+  height: 20px;
+  aspect-ratio: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(0.35);
+}
+
+.carousel.press .carousel-slide .carousel-slide-content {
+  position: static;
+  background: none;
+  color: var(--text-color);
+  max-width: none;
+  padding: 16px 0 0;
+}
+
+.carousel.press .carousel-slide .carousel-slide-content p {
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  line-height: 1.6;
+  font-style: normal;
+}
+
+.carousel.press .carousel-nav-bar {
+  justify-content: flex-end;
+  position: absolute;
+  top: -60px;
+  right: 0;
+  padding: 0;
+}
+
+.carousel.press .carousel-slide-indicators {
+  display: none;
+}
+
+.carousel.press .carousel-nav-description {
+  display: none;
+}
+
+@media (width >= 600px) {
+  .carousel.press .carousel-slide {
+    flex: 0 0 calc(50% - 24px);
+    padding: 40px;
+  }
+
+  .carousel.press .carousel-slide .carousel-slide-image picture > img {
+    height: 24px;
+  }
+}
+
+@media (width >= 900px) {
+  .carousel.press .carousel-slide {
+    flex: 0 0 calc(50% - 24px);
+    padding: 48px;
+  }
+
+  .carousel.press .carousel-slide .carousel-slide-content p {
+    font-size: var(--body-font-size-m);
+  }
+}
