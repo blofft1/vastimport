@@ -6,6 +6,10 @@
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+function isDMOpenAPIUrl(url) {
+  return url.includes('adobeaemcloud.com/adobe/assets/');
+}
+
 function embedYoutube(url, autoplay, background) {
   const usp = new URLSearchParams(url.search);
   let suffix = '';
@@ -54,6 +58,19 @@ function embedVimeo(url, autoplay, background) {
   return temp.children.item(0);
 }
 
+function embedDMVideo(link) {
+  // Ensure the URL ends with /play for the DM video player
+  const playUrl = link.endsWith('/play') ? link : `${link}/play`;
+  const temp = document.createElement('div');
+  temp.innerHTML = `<div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
+      <iframe src="${playUrl}"
+      style="border: 0; top: 0; left: 0; width: 100%; height: 100%; position: absolute;"
+      allow="autoplay; fullscreen; encrypted-media" allowfullscreen
+      title="Dynamic Media Video" loading="lazy"></iframe>
+    </div>`;
+  return temp.children.item(0);
+}
+
 function getVideoElement(source, autoplay, background) {
   const video = document.createElement('video');
   video.setAttribute('controls', '');
@@ -84,6 +101,7 @@ const loadVideoEmbed = (block, link, autoplay, background) => {
 
   const isYoutube = link.includes('youtube') || link.includes('youtu.be');
   const isVimeo = link.includes('vimeo');
+  const isDM = isDMOpenAPIUrl(link);
 
   if (isYoutube) {
     const embedWrapper = embedYoutube(url, autoplay, background);
@@ -93,6 +111,12 @@ const loadVideoEmbed = (block, link, autoplay, background) => {
     });
   } else if (isVimeo) {
     const embedWrapper = embedVimeo(url, autoplay, background);
+    block.append(embedWrapper);
+    embedWrapper.querySelector('iframe').addEventListener('load', () => {
+      block.dataset.embedLoaded = true;
+    });
+  } else if (isDM) {
+    const embedWrapper = embedDMVideo(link);
     block.append(embedWrapper);
     embedWrapper.querySelector('iframe').addEventListener('load', () => {
       block.dataset.embedLoaded = true;

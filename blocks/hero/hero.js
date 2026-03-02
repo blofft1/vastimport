@@ -1,8 +1,13 @@
 const VIDEO_EXTENSIONS = ['.mp4', '.webm', '.ogg'];
 
+function isDMOpenAPIUrl(url) {
+  return url.includes('adobeaemcloud.com/adobe/assets/');
+}
+
 function isVideoLink(link) {
   const href = link?.href || '';
-  return VIDEO_EXTENSIONS.some((ext) => href.toLowerCase().includes(ext));
+  return VIDEO_EXTENSIONS.some((ext) => href.toLowerCase().includes(ext))
+    || isDMOpenAPIUrl(href);
 }
 
 function buildOverlayControls(block, ctaLink) {
@@ -80,7 +85,11 @@ export default function decorate(block) {
 
   const source = document.createElement('source');
   source.src = videoSrc;
-  source.type = `video/${videoSrc.split('.').pop().split('?')[0]}`;
+  if (isDMOpenAPIUrl(videoSrc)) {
+    source.type = 'video/mp4';
+  } else {
+    source.type = `video/${videoSrc.split('.').pop().split('?')[0]}`;
+  }
   video.append(source);
 
   block.prepend(video);
