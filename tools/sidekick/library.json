@@ -1,13 +1,13 @@
 {
   "blocks": {
     "data": [
-      { "name": "Accordion", "path": "/blocks/accordion" },
-      { "name": "Breadcrumbs", "path": "/blocks/breadcrumbs" },
-      { "name": "Buttons", "path": "/blocks/buttons" },
-      { "name": "Cards", "path": "/blocks/cards" },
-      { "name": "Carousel", "path": "/blocks/carousel" },
-      { "name": "Columns", "path": "/blocks/columns" },
-      { "name": "Video", "path": "/blocks/video" }
+      { "name": "Accordion", "path": "/docs/library/blocks/accordion" },
+      { "name": "Breadcrumbs", "path": "/docs/library/blocks/breadcrumbs" },
+      { "name": "Buttons", "path": "/docs/library/blocks/buttons" },
+      { "name": "Cards", "path": "/docs/library/blocks/cards" },
+      { "name": "Carousel", "path": "/docs/library/blocks/carousel" },
+      { "name": "Columns", "path": "/docs/library/blocks/columns" },
+      { "name": "Video", "path": "/docs/library/blocks/video" }
     ]
   }
 }
