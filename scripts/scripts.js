@@ -10,7 +10,85 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  loadScript,
+  getMetadata,
+  sampleRUM,
+  toCamelCase,
+  toClassName,
 } from './aem.js';
+
+/**
+ * Returns all metadata from meta tags whose name starts with a given prefix.
+ * @param {string} prefix The prefix to search for
+ * @returns {object} An object of all matching metadata key/value pairs
+ */
+function getAllMetadata(prefix) {
+  const result = {};
+  const metaTags = document.querySelectorAll(`meta[name^="${prefix}"], meta[property^="${prefix}"]`);
+  metaTags.forEach((tag) => {
+    const name = tag.getAttribute('name') || tag.getAttribute('property');
+    const val = tag.getAttribute('content');
+    if (name && val) {
+      result[name.substring(prefix.length + 1)] = val;
+    }
+  });
+  return result;
+}
+
+/**
+ * Audience definitions for experimentation/personalization.
+ */
+const AUDIENCES = {
+  mobile: () => window.innerWidth < 600,
+  desktop: () => window.innerWidth >= 600,
+};
+
+/**
+ * Context object required by the experimentation plugin.
+ */
+const pluginContext = {
+  getAllMetadata,
+  getMetadata,
+  loadCSS,
+  loadScript,
+  sampleRUM,
+  toCamelCase,
+  toClassName,
+};
+
+/**
+ * Processes a metadata block in <main> into <meta> tags in <head>.
+ * This handles local dev where the AEM CDN isn't processing the metadata block.
+ */
+function processLocalMetadata() {
+  const metaBlock = document.querySelector('main div.metadata');
+  if (!metaBlock) return;
+  [...metaBlock.children].forEach((row) => {
+    const key = row.children[0]?.textContent?.trim().toLowerCase().replace(/\s+/g, '-');
+    const value = row.children[1]?.textContent?.trim();
+    if (key && value && !document.head.querySelector(`meta[name="${key}"]`)) {
+      const meta = document.createElement('meta');
+      meta.name = key;
+      meta.content = value;
+      document.head.append(meta);
+    }
+  });
+  metaBlock.remove();
+}
+
+/**
+ * Checks if the current page has experimentation metadata or query params.
+ * @returns {boolean} true if experimentation is configured
+ */
+function hasExperimentationMetadata() {
+  const params = new URLSearchParams(window.location.search);
+  return !!(getMetadata('experiment')
+    || Object.keys(getAllMetadata('campaign')).length
+    || Object.keys(getAllMetadata('audience')).length
+    || params.has('experiment')
+    || params.has('campaign')
+    || params.has('audience'));
+}
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -135,6 +213,16 @@ async function loadEager(doc) {
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
   if (main) {
+    processLocalMetadata();
+
+    // Initialize experimentation plugin BEFORE decorateMain so that if the
+    // plugin swaps in challenger content, decoration applies to the new content.
+    if (hasExperimentationMetadata()) {
+      // eslint-disable-next-line import/no-relative-packages
+      const { loadEager: runEager } = await import('../plugins/experimentation/src/index.js');
+      await runEager(document, { audiences: AUDIENCES }, pluginContext);
+    }
+
     decorateMain(main);
     document.body.classList.add('appear');
     await loadSection(main.querySelector('.section'), waitForFirstImage);
@@ -168,6 +256,13 @@ async function loadLazy(doc) {
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
+
+  // Load experimentation overlay (visible on preview/localhost)
+  if (hasExperimentationMetadata()) {
+    // eslint-disable-next-line import/no-relative-packages
+    const { loadLazy: runLazy } = await import('../plugins/experimentation/src/index.js');
+    await runLazy(document, { audiences: AUDIENCES }, pluginContext);
+  }
 }
 
 /**
