@@ -1,0 +1,25 @@
+.dm-template {
+  padding: 0;
+  max-width: 100%;
+}
+
+.dm-template picture {
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+.dm-template img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.dm-template .dm-template-error {
+  color: #b00;
+  font-style: italic;
+  padding: 16px;
+  background: #fff0f0;
+  border: 1px solid #fcc;
+  border-radius: 4px;
+}
