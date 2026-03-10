@@ -7,7 +7,8 @@
       { "name": "Cards", "path": "/docs/library/blocks/cards" },
       { "name": "Carousel", "path": "/docs/library/blocks/carousel" },
       { "name": "Columns", "path": "/docs/library/blocks/columns" },
-      { "name": "Video", "path": "/docs/library/blocks/video" }
+      { "name": "Video", "path": "/docs/library/blocks/video" },
+      { "name": "DM Template", "path": "/docs/library/blocks/dm-template" }
     ]
   }
 }
