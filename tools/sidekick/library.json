@@ -2,7 +2,7 @@
   "blocks": {
     "data": [
       { "name": "hero", "path": "/docs/library/blocks/hero" },
-      { "name": "Page metadata", "path": "/docs/library/blocks/metadata" },
+      { "name": "Page metadata", "path": "/docs/library/blocks/page-metadata" },
       { "name": "Section metadata", "path": "/docs/library/blocks/section-metadata" },
       { "name": "Cards", "path": "/docs/library/blocks/cards" },
       { "name": "Carousel", "path": "/docs/library/blocks/carousel" },
