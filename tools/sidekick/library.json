@@ -2,20 +2,12 @@
   "blocks": {
     "data": [
       { "name": "hero", "path": "/docs/library/blocks/hero" },
+      { "name": "Page metadata", "path": "/docs/library/blocks/metadata" },
+      { "name": "Section metadata", "path": "/docs/library/blocks/section-metadata" },
       { "name": "Cards", "path": "/docs/library/blocks/cards" },
       { "name": "Carousel", "path": "/docs/library/blocks/carousel" },
       { "name": "Columns", "path": "/docs/library/blocks/columns" },
       { "name": "Video", "path": "/docs/library/blocks/video" }
-    ]
-  },
-  "metadata": {
-    "data": [
-      { "name": "metadata", "path": "/docs/library/blocks/metadata" }
-    ]
-  },
-  "section-metadata": {
-    "data": [
-      { "name": "section-metadata", "path": "/docs/library/blocks/section-metadata" }
     ]
   }
 }
