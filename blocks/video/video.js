@@ -181,9 +181,44 @@ function buildOverlayControls(block, videoLink) {
   block.append(controls);
 }
 
+/**
+ * Builds a hero-style text overlay from the second row of the block.
+ * Supports headings, paragraphs, and CTA links.
+ * @param {Element} overlayRow The row element containing overlay content
+ * @returns {Element} The overlay element
+ */
+function buildHeroOverlay(overlayRow) {
+  const overlay = document.createElement('div');
+  overlay.className = 'video-hero-overlay';
+  const content = overlayRow.querySelector('div');
+  if (content) {
+    overlay.append(...content.childNodes);
+  }
+  // Convert links to styled buttons
+  overlay.querySelectorAll('a').forEach((a) => {
+    a.classList.add('video-hero-cta');
+  });
+  return overlay;
+}
+
 export default async function decorate(block) {
-  const placeholder = block.querySelector('picture');
-  const allLinks = [...block.querySelectorAll('a')];
+  const rows = [...block.children];
+  const firstRow = rows[0];
+
+  // Check for hero overlay content in row 2+
+  const overlayRows = rows.slice(1);
+  let heroOverlay = null;
+  if (overlayRows.length) {
+    // Check if any overlay row has text content (headings, paragraphs)
+    const hasTextContent = overlayRows.some((row) => row.querySelector('h1, h2, h3, h4, h5, h6, p'));
+    if (hasTextContent) {
+      heroOverlay = buildHeroOverlay(overlayRows[0]);
+      block.classList.add('hero');
+    }
+  }
+
+  const placeholder = firstRow ? firstRow.querySelector('picture') : null;
+  const allLinks = firstRow ? [...firstRow.querySelectorAll('a')] : [];
 
   // First link is the video source, any additional link is a CTA overlay
   const sourceLink = allLinks[0];
@@ -226,5 +261,10 @@ export default async function decorate(block) {
 
   if (autoplay && (ctaLink || placeholder)) {
     buildOverlayControls(block, ctaLink);
+  }
+
+  // Append hero overlay last so it sits on top
+  if (heroOverlay) {
+    block.append(heroOverlay);
   }
 }

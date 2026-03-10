@@ -178,3 +178,108 @@
   border-top: 1.5px solid white;
   transform: rotate(45deg);
 }
+
+/* Hero variant — full viewport video with text overlay */
+.video.autoplay.hero {
+  aspect-ratio: unset;
+  height: 100vh;
+  min-height: 500px;
+}
+
+/* Embed wrapper — stretch to fill hero area */
+.video.autoplay.hero > div:not(.video-hero-overlay, .video-overlay-controls) {
+  position: absolute !important;
+  inset: 0;
+  height: 100% !important;
+  padding-bottom: 0 !important;
+  display: block;
+}
+
+.video.autoplay.hero iframe {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  inset: 0;
+  object-fit: cover;
+}
+
+/* Dark gradient overlay for text readability */
+.video .video-hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 10%) 0%,
+    rgb(0 0 0 / 40%) 50%,
+    rgb(0 0 0 / 10%) 100%
+  );
+}
+
+.video .video-hero-overlay h1,
+.video .video-hero-overlay h2 {
+  color: white;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin: 0 0 8px;
+  text-shadow: 0 2px 8px rgb(0 0 0 / 40%);
+  max-width: 800px;
+}
+
+.video .video-hero-overlay h3 {
+  color: white;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  margin: 0 0 24px;
+  text-shadow: 0 2px 6px rgb(0 0 0 / 40%);
+  max-width: 700px;
+}
+
+.video .video-hero-overlay p {
+  color: white;
+  margin: 0 0 12px;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 40%);
+}
+
+/* Hero CTA button */
+.video .video-hero-overlay .video-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: #e68619;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: background 0.2s;
+  text-shadow: none;
+}
+
+.video .video-hero-overlay .video-hero-cta:hover {
+  background: #d4760f;
+}
+
+.video .video-hero-overlay .video-hero-cta::after {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid white;
+  border-top: 2px solid white;
+  transform: rotate(45deg);
+}
+
+/* Move overlay controls to bottom-right in hero mode */
+.video.hero .video-overlay-controls {
+  left: auto;
+  right: 24px;
+  z-index: 3;
+}
