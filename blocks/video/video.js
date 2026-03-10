@@ -182,22 +182,33 @@ function buildOverlayControls(block, videoLink) {
 }
 
 /**
- * Builds a hero-style text overlay from the second row of the block.
- * Supports headings, paragraphs, and CTA links.
- * @param {Element} overlayRow The row element containing overlay content
+ * Builds a hero-style text overlay from separate rows of the block.
+ * Row 2 = heading, Row 3 = subheading, Row 4 = CTA link.
+ * @param {Element[]} overlayRows The rows containing overlay content
  * @returns {Element} The overlay element
  */
-function buildHeroOverlay(overlayRow) {
+function buildHeroOverlay(overlayRows) {
   const overlay = document.createElement('div');
   overlay.className = 'video-hero-overlay';
-  const content = overlayRow.querySelector('div');
-  if (content) {
-    overlay.append(...content.childNodes);
-  }
-  // Convert links to styled buttons
-  overlay.querySelectorAll('a').forEach((a) => {
+
+  const card = document.createElement('div');
+  card.className = 'video-hero-card';
+
+  overlayRows.forEach((row) => {
+    const cell = row.querySelector('div');
+    if (!cell) return;
+    // Move all child nodes into the card
+    [...cell.childNodes].forEach((node) => {
+      card.append(node);
+    });
+  });
+
+  // Convert links to styled CTA buttons
+  card.querySelectorAll('a').forEach((a) => {
     a.classList.add('video-hero-cta');
   });
+
+  overlay.append(card);
   return overlay;
 }
 
@@ -209,10 +220,9 @@ export default async function decorate(block) {
   const overlayRows = rows.slice(1);
   let heroOverlay = null;
   if (overlayRows.length) {
-    // Check if any overlay row has text content (headings, paragraphs)
     const hasTextContent = overlayRows.some((row) => row.querySelector('h1, h2, h3, h4, h5, h6, p'));
     if (hasTextContent) {
-      heroOverlay = buildHeroOverlay(overlayRows[0]);
+      heroOverlay = buildHeroOverlay(overlayRows);
       block.classList.add('hero');
     }
   }

@@ -203,71 +203,70 @@
   object-fit: cover;
 }
 
-/* Dark gradient overlay for text readability */
+/* Hero overlay — positions content over video */
 .video .video-hero-overlay {
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 24px;
+  padding: 40px 32px;
   z-index: 2;
-  background: linear-gradient(
-    to bottom,
-    rgb(0 0 0 / 10%) 0%,
-    rgb(0 0 0 / 40%) 50%,
-    rgb(0 0 0 / 10%) 100%
-  );
 }
 
-.video .video-hero-overlay h1,
-.video .video-hero-overlay h2 {
+/* Translucent card behind the text */
+.video .video-hero-card {
+  background: rgb(0 0 0 / 50%);
+  padding: 32px 40px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.video .video-hero-card h1,
+.video .video-hero-card h2 {
   color: white;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 700;
+  font-size: clamp(1.8rem, 4vw, 2.25rem);
+  font-weight: 600;
+  margin: 0 0 4px;
+  text-align: center;
+}
+
+.video .video-hero-card h3 {
+  color: white;
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  font-weight: 600;
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+.video .video-hero-card p {
+  color: white;
   margin: 0 0 8px;
-  text-shadow: 0 2px 8px rgb(0 0 0 / 40%);
-  max-width: 800px;
+  text-align: center;
 }
 
-.video .video-hero-overlay h3 {
-  color: white;
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-  font-weight: 400;
-  margin: 0 0 24px;
-  text-shadow: 0 2px 6px rgb(0 0 0 / 40%);
-  max-width: 700px;
-}
-
-.video .video-hero-overlay p {
-  color: white;
-  margin: 0 0 12px;
-  text-shadow: 0 1px 4px rgb(0 0 0 / 40%);
-}
-
-/* Hero CTA button */
-.video .video-hero-overlay .video-hero-cta {
+/* Hero CTA button — orange with chevron */
+.video .video-hero-card .video-hero-cta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 14px 32px;
-  background: #e68619;
+  padding: 12px 24px;
+  background: #fb923c;
   color: white;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  border-radius: 30px;
+  border-radius: 4px;
   transition: background 0.2s;
-  text-shadow: none;
+  margin-top: 8px;
 }
 
-.video .video-hero-overlay .video-hero-cta:hover {
-  background: #d4760f;
+.video .video-hero-card .video-hero-cta:hover {
+  background: #ea7c22;
 }
 
-.video .video-hero-overlay .video-hero-cta::after {
+.video .video-hero-card .video-hero-cta::after {
   content: '';
   display: inline-block;
   width: 8px;
